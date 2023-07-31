@@ -1,5 +1,6 @@
-package com.example.tutorials
+package com.example.hello
 
+import android.app.Person
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.Menu
@@ -7,8 +8,9 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.tutorials.databinding.ActivityMainBinding
+import com.example.hello.databinding.ActivityMainBinding
 
+data class Person(val name: String, val age: Int)
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,11 +25,11 @@ class MainActivity : AppCompatActivity() {
         binding.rvContacts.layoutManager = LinearLayoutManager(this)
     }
 
-    public fun createContacts(): List<Person> {
-        val contacts: MutableList<Person> = mutableListOf<Person>()
-        for (i in 1..100) {
-            contacts.add(Person("Person $i", i))
+    private fun createContacts(){
+        val contacts:MutableList<Person> = mutableListOf<Person>()
+        for(i:Int in 1..100){
+            contacts.add(Person("Person $i",i))
         }
-        return contacts
     }
+
 }
