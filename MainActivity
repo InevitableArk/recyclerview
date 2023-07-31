@@ -1,0 +1,33 @@
+package com.example.tutorials
+
+import android.os.Bundle
+import android.os.PersistableBundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.tutorials.databinding.ActivityMainBinding
+
+
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onCreate(savedInstanceState, persistentState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val contacts = createContacts()
+        binding.rvContacts.adapter = ContactsAdapter(this, createContacts())
+        binding.rvContacts.layoutManager = LinearLayoutManager(this)
+    }
+
+    public fun createContacts(): List<Person> {
+        val contacts: MutableList<Person> = mutableListOf<Person>()
+        for (i in 1..100) {
+            contacts.add(Person("Person $i", i))
+        }
+        return contacts
+    }
+}
