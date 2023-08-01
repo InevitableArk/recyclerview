@@ -1,35 +1,33 @@
-package com.example.hello
+package com.example.words
 
-import android.app.Person
-import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.Toast
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.hello.databinding.ActivityMainBinding
+import com.example.words.databinding.ActivityMainBinding
 
-data class Person(val name: String, val age: Int)
+data class Person(val name:String,val age:Int)
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val contacts:MutableList<Person> = mutableListOf<Person>()
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate((layoutInflater))
         setContentView(binding.root)
-        val contacts = createContacts()
-        binding.rvContacts.adapter = ContactsAdapter(this, createContacts())
-        binding.rvContacts.layoutManager = LinearLayoutManager(this)
+        val person = createPerson()
+        binding.rvPerson.adapter = PersonAdapter(this, person)
+        binding.rvPerson.layoutManager = LinearLayoutManager(this)
     }
 
-    private fun createContacts(){
-        val contacts:MutableList<Person> = mutableListOf<Person>()
-        for(i:Int in 1..100){
-            contacts.add(Person("Person $i",i))
+    private fun createPerson():List<Person>{
+        for (i in 1..10) {
+            val person = Person("Person $i", i)
+            contacts.add(person)
         }
+        return contacts
     }
-
 }
